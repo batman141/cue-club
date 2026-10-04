@@ -1,0 +1,32 @@
+html, body, #root, .app-root {
+  margin: 0; padding: 0;
+  width: 100vw; height: 100vh;
+  background-color: #050505;
+  color: #fff;
+  font-family: 'Arial', sans-serif;
+  overflow: hidden;
+}
+
+.menu-container {
+  display: flex; flex-direction: column;
+  justify-content: center; align-items: flex-start;
+  height: 100%; padding-left: 10vw;
+  background: linear-gradient(90deg, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0) 100%);
+}
+
+h1 { font-size: 4rem; margin: 0; font-weight: 900; font-style: italic; letter-spacing: -2px; }
+h2 { font-size: 2rem; margin: 0 0 20px 0; }
+p { color: #888; font-weight: bold; margin-top: -5px; margin-bottom: 40px;}
+
+.menu-options { display: flex; flex-direction: column; gap: 15px; }
+
+button {
+  background: none; border: none; color: #fff;
+  font-size: 1.5rem; font-weight: bold; text-align: left;
+  cursor: pointer; padding: 5px 0; transition: color 0.2s;
+}
+
+button:hover { color: #ff3333; }
+button:disabled { color: #333; cursor: not-allowed; }
+
+.hud { position: absolute; top: 20px; left: 20px; z-index: 10; }
