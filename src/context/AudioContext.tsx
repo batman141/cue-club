@@ -79,19 +79,48 @@ export const AudioProvider: React.FC<{ children: React.ReactNode }> = ({
     }
   }, [isPlaying]);
 
-  const addTracks = (files: FileList) => {
-    const newTracks: Track[] = Array.from(files).map((file) => ({
-      id: crypto.randomUUID(),
-      title: file.name.replace(/\.[^/.]+$/, ""), // strips the .mp3 extension
-      url: URL.createObjectURL(file), // creates browser-playable stream
-    }));
+  async function computeAudioHash(file: File): Promise<string> {
+    const buffer = await file.arrayBuffer();
+    const digest = await crypto.subtle.digest("SHA-256", buffer);
+    const hashArray = Array.from(new Uint8Array(digest));
+    return hashArray.map((b) => b.toString(16).padStart(2, "0")).join("");
+  }
+
+  const addTracks = async (files: FileList) => {
+    // 1. Calculate hashes concurrently for all incoming files
+    const fileEntries = await Promise.all(
+      Array.from(files).map(async (file) => ({
+        file,
+        hashId: await computeAudioHash(file),
+      })),
+    );
 
     setPlaylist((prev) => {
+      // 2. Track existing IDs in a Set
+      const existingIds = new Set(prev.map((track) => track.id));
+      const newTracks: Track[] = [];
+
+      // 3. Only create tracks (and blob URLs) for genuinely new files
+      for (const { file, hashId } of fileEntries) {
+        if (!existingIds.has(hashId)) {
+          existingIds.add(hashId); // Guards against duplicates within this batch
+          newTracks.push({
+            id: hashId,
+            title: file.name.replace(/\.[^/.]+$/, ""),
+            url: URL.createObjectURL(file), // Created ONLY when approved
+          });
+        }
+      }
+
+      // 4. No new tracks? Return prev untouched (prevents re-render)
+      if (newTracks.length === 0) return prev;
+
       const updated = [...prev, ...newTracks];
-      // If nothing was playing, queue up the first track
+
       if (currentTrackIndex === null && updated.length > 0) {
         setCurrentTrackIndex(0);
       }
+
       return updated;
     });
   };

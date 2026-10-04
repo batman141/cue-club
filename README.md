@@ -1,75 +1,39 @@
-# React + TypeScript + Vite
+# CUE CLUB
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+> _"The felt was green, but everything else had long since turned gray. Another smoky room, another cue ball staring back at me like a bad conscience."_
 
-Currently, two official plugins are available:
+A gritty, noir-inspired web pool game built with React, TypeScript, and Vite. Designed with high-contrast, cynical aesthetics reminiscent of _Max Payne_, featuring a custom local radio station to soundtrack every broken break and missed corner pocket.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+---
 
-## React Compiler
+## Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Classic 8-Ball Mechanics**: Responsive top-down pool physics and cue trajectory control.
+- **Max Payne Noir UI**: Bold, cynical monologues, stark contrasts, and gritty match commentary.
+- **Independence FM**: Custom in-browser audio engine allowing players to load and shuffle their own local MP3/audio tracks without third-party subscriptions or streaming limits.
+- **Match Ledger**: Game tracking and history with cynical, randomized empty states.
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Tech Stack
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- **Framework**: React 18+ (Vite)
+- **Language**: TypeScript (`verbatimModuleSyntax` enabled)
+- **State & Audio**: React Context API + Native Web Audio API (`AudioContext`)
+- **Styling**: Custom CSS / High-contrast noir typography
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+---
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Getting Started
 
-```
+### Prerequisites
 
-You can also install [eslint-plugin-react-x](https://npmx.dev/package/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://npmx.dev/package/eslint-plugin-react-dom) for React-specific lint rules:
+Make sure you have Node.js (v18+) installed on your machine.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### Installation
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
-```
+1. **Clone the repository:**
+   ```bash
+   git clone [https://github.com/batman141/cue-club.git](https://github.com/batman141/cue-club.git)
+   cd cue-club
+   ```
